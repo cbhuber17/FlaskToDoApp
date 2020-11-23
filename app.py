@@ -51,6 +51,8 @@ def create_todo():
         db.session.add(todo)
         db.session.commit()
 
+        body['id'] = todo.id
+        body['completed'] = todo.completed
         body['description'] = todo.description
 
     except:
@@ -75,7 +77,7 @@ def create_todo():
         #     'description': todo.description
         # })
 
-        return body
+        return jsonify(body)
 
 
 @app.route('/todos/<todo_id>/set-completed', methods=['POST'])
