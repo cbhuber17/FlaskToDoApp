@@ -26,11 +26,33 @@ document.getElementById('form').onsubmit = function (e) {
             const text = document.createTextNode(' ' + jsonResponse.description);
             liItem.appendChild(text);
 
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'remove-todo';
+            deleteButton.setAttribute('data-id', jsonResponse.id);
+            deleteButton.innerHTML = 'x';
+            liItem.appendChild(deleteButton);
+
             document.getElementById('todos').appendChild(liItem);
-            updateCheckboxes();
+
+            // This allows a newly created item to be deleted
+            deleteButton.addEventListener('click', handleDelete);
         })
         .catch(function (error) {
             alert('ERROR: Could not fetch todos/create.  Msg: ' + error)
+        })
+}
+
+function handleDelete(e) {
+
+    fetch('/todos/' + e.target.dataset['id'], {
+        method: 'DELETE'
+    })
+        .then(function () {
+            const item = e.target.parentElement;
+            item.remove();
+        })
+        .catch(function (error) {
+            alert('ERROR: Could not fetch /remove/' + e.target.dataset['id'] + '.  Msg: ' + error)
         })
 }
 

@@ -12,19 +12,29 @@
 </head>
 
 <body>
-    <!-- <form id="form" action="/todos/create" method="POST"> -->
-    <!-- Script below will now handle the POST request -->
-    <form id="form">
-        <input type="text" name="description" id="description">
-        <input type="submit" value="Create">
-    </form>
-    <ul id="todos">
-        {% for d in data %}
-        <li> <input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked
-                {% endif %}>
-            {{ d.description }}</li>
-        {% endfor %}
-    </ul>
+    <main class="centered">
+        <h1>TO DO LIST:</h1>
+        <!-- <form id="form" action="/todos/create" method="POST"> -->
+        <!-- Script below will now handle the POST request -->
+        <form id="form">
+            <input type="text" name="description" id="description">
+            <input type="submit" value="Create">
+        </form>
+        <ul id="todos">
+            {% for d in data %}
+
+            <li>
+                <input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked
+                    {% endif %}>
+
+                {{ d.description }}
+
+                <button class="remove-todo" data-id="{{ d.id }}" onclick="handleDelete(event)">x</button>
+            </li>
+
+            {% endfor %}
+        </ul>
+    </main>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/processForm.js') }}"></script>
 
