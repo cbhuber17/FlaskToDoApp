@@ -14,6 +14,8 @@ body {
 
 h1 {
     text-decoration: underline;
+    text-transform: uppercase;
+    text-shadow: 2px 2px black;
 }
 
 #form {
@@ -23,7 +25,7 @@ h1 {
 .centered {
     background: linear-gradient(to bottom right, blueviolet, skyblue);
     border: 2px solid skyblue;
-    width: 50vh;
+    width: 75vh;
     text-align: center;
     margin: 0;
     position: absolute;
@@ -31,6 +33,23 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 3px 3px 3px;
+}
+
+.lists-wrapper, .todos-wrapper {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.lists-wrapper {
+    transform: translateX(-50%);
+}
+
+.lists-wrapper li {
+    padding: 5px;
+}
+
+.lists-wrapper a, a:visited, a:hover, a:active {
+    color: inherit;
 }
 
 ul {

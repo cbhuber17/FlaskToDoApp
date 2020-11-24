@@ -13,27 +13,40 @@
 
 <body>
     <main class="centered">
-        <h1>TO DO LIST:</h1>
+        <h1>{{active_list.name }} to do list:</h1>
         <!-- <form id="form" action="/todos/create" method="POST"> -->
         <!-- Script below will now handle the POST request -->
-        <form id="form">
-            <input type="text" name="description" id="description">
-            <input type="submit" value="Create">
-        </form>
-        <ul id="todos">
-            {% for d in data %}
 
-            <li>
-                <input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked
-                    {% endif %}>
+        <div class="lists-wrapper">
+            <ul id="lists">
+                {% for list in lists %}
+                <!-- <li>{{ list.name }}</li> -->
+                <li><a href="/list/{{ list.id }}">{{ list.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
-                {{ d.description }}
+        <div class="todos-wrapper">
+            <form id="form">
+                <input type="text" name="description" id="description">
+                <input type="submit" value="Create">
+            </form>
+            <ul id="todos">
+                {% for todo in todos %}
 
-                <button class="remove-todo" data-id="{{ d.id }}" onclick="handleDelete(event)">x</button>
-            </li>
+                <li>
+                    <input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %}
+                        checked {% endif %}>
 
-            {% endfor %}
-        </ul>
+                    {{ todo.description }}
+
+                    <button class="remove-todo" data-id="{{ todo.id }}" onclick="handleDelete(event)">x</button>
+                </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+
     </main>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/processForm.js') }}"></script>
